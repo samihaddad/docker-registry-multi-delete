@@ -5,7 +5,7 @@ addCheckboxes();
 
 
 function deleteImages() {
-
+    $('body').append('<div class="loading"></div>');
     $.each(checkedImages, function (index, tag) {
         $.get(API + getImageName() + '/' + tag)
         .done(function() {

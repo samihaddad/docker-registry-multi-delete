@@ -6,7 +6,8 @@
     "version": "1.0",
     "content_scripts": [{
         "matches": ["https://usr.ubanquity.io/repo/tags/*"],
-        "js": ["jquery-3.3.1.min.js","content.js"]
+        "js": ["jquery-3.3.1.min.js","content.js"],
+        "css": ["style.css"]
 
     }],
     "icons": {
