@@ -8,11 +8,11 @@ function deleteImages() {
     $('body').append('<div class="loading"></div>');
     $.each(checkedImages, function (index, tag) {
         $.get(API + getImageName() + '/' + tag)
-        .done(function() {
-            if (index == checkedImages.length - 1) {
-                location.reload();
-            }
-        });
+            .done(function () {
+                if (index == checkedImages.length - 1) {
+                    location.reload();
+                }
+            });
     });
 }
 
@@ -26,7 +26,7 @@ function toggleDeleteButton(show) {
         button.appendTo($("dl"));
 
         button.click(function () {
-            if (confirm("Are you sure you want to delete selected images?")) {
+            if (confirm('Are you sure you want to delete the following images?\n'+checkedImages.join("\n"))) {
                 deleteImages();
             };
         });
@@ -40,12 +40,22 @@ function addCheckboxes() {
     var table = $('#main');
 
     var tableHeaderRow = table.find('thead tr');
-    tableHeaderRow.prepend("<th></th>");
+    tableHeaderRow.prepend('<th><input class="docker-all-checkboxes" type="checkbox" value="*"></th>');
 
     var tableBodyRows = table.find('tbody tr');
-    tableBodyRows.prepend('<td><input type="checkbox"></td>');
+    tableBodyRows.prepend('<td><input class="docker-tag-checkbox" type="checkbox"></td>');
 
-    $('#main :checkbox').change(function () {
+    $('#main :checkbox').change(function (c) {
+
+        if ($(this).val() == "*") {
+            if (this.checked) {
+                $('#main .docker-tag-checkbox:checkbox').prop('checked', true).change();
+            } else {
+                $('#main .docker-tag-checkbox:checkbox').prop('checked', false).change();
+            }
+            if (!checkedImages.length) toggleDeleteButton(this.checked);
+            return;
+        }
         var imageTag = $(this).parent().parent().find('td:nth-child(3)').text();
         if (this.checked) {
             if (!checkedImages.length) toggleDeleteButton(true);
