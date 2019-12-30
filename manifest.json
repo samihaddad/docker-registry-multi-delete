@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "Docker Registry Multi-Delete",
     "description": "This extension allows you to delete multiple docker images simultaneously ",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "content_scripts": [{
         "matches": ["https://usr.ubanquity.io/repo/tags/*"],
         "js": ["jquery-3.3.1.min.js","content.js"],
