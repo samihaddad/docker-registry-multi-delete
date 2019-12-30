@@ -1,8 +1,8 @@
 var checkedImages = [];
 var API = '/repo/delete/';
 
+addCopyButton();
 addCheckboxes();
-
 
 function deleteImages() {
     $('body').append('<div class="loading"></div>');
@@ -26,7 +26,7 @@ function toggleDeleteButton(show) {
         button.appendTo($("dl"));
 
         button.click(function () {
-            if (confirm('Are you sure you want to delete the following images?\n'+checkedImages.join("\n"))) {
+            if (confirm('Are you sure you want to delete the following images?\n' + checkedImages.join("\n"))) {
                 deleteImages();
             };
         });
@@ -34,6 +34,20 @@ function toggleDeleteButton(show) {
     } else {
         $("#delete-button").remove();
     }
+}
+
+function addCopyButton() {
+
+    var dockerTags = $('#main tbody tr td:nth-child(2)');
+
+    dockerTags.each(function () {
+        var dockerTag = $(this);
+        var copyButton = $('<a class="copy-tag" href="javascript:;"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span></a>');
+        dockerTag.append(copyButton);
+        copyButton.click(function () {
+            copyTextToClipboard(dockerTag.text());
+        });
+    });
 }
 
 function addCheckboxes() {
@@ -65,4 +79,8 @@ function addCheckboxes() {
             if (!checkedImages.length) toggleDeleteButton(false);
         }
     });
+}
+
+function copyTextToClipboard(text) {
+    navigator.clipboard.writeText(text);
 }
