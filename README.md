@@ -3,6 +3,6 @@
 [Chrome Extension](https://chrome.google.com/webstore/detail/giknieejnbffcbgmfeaklhljnlhhjcig/)
 
 
-# Features
+## Features
 - Delete multiple images at the same time.
 - Copy tag to clipboard
